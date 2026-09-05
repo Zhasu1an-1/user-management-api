@@ -1,21 +1,14 @@
 package com.zhasulan.usermanagement;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "profile_users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserRequestDTO {
     private String name;
     private String email;
     private String phone;
     private String password;
     private int age;
 
-    public User(){}
-    public User(String name, String email, String phone, String password, int age){
+    public UserRequestDTO(){}
+    public UserRequestDTO(String name, String email, String phone, String password, int age){
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -23,14 +16,12 @@ public class User {
         this.age = age;
     }
 
-    public Long getId(){ return this.id; }
     public String getName(){ return this.name; }
     public String getEmail(){ return this.email; }
     public String getPhone(){ return this.phone; }
     public String getPassword(){ return this.password; }
     public int getAge(){ return this.age; }
 
-    public void setId(Long id){ this.id = id; }
     public void setName(String name){ this.name = name; }
     public void setEmail(String email){ this.email = email; }
     public void setPhone(String phone){ this.phone = phone; }
