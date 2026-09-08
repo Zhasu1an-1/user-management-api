@@ -1,5 +1,6 @@
 package com.zhasulan.usermanagement;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,15 +27,15 @@ public class UserController {
         return userService.deleteUserById(id);
     }
 
-    @PostMapping("/auth/login")
-    public String userLogin(@RequestBody UserRequestDTO user){
-        return userService.login(user);
+    @PostMapping("/auth/register")
+    public String userRegister(@Valid @RequestBody UserRequestDTO user){
+        return userService.register(user);
     }
 
     @PutMapping("/users/{id}")
     public String updateUser(
             @PathVariable Long id,
-            @RequestBody User user
+            @Valid @RequestBody UserRequestDTO user
     ){
         return userService.updateUserById(id, user);
     }

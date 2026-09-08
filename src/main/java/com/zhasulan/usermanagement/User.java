@@ -12,10 +12,10 @@ public class User {
     private String email;
     private String phone;
     private String password;
-    private int age;
+    private Integer age;
 
     public User(){}
-    public User(String name, String email, String phone, String password, int age){
+    public User(String name, String email, String phone, String password, Integer age){
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -28,12 +28,12 @@ public class User {
     public String getEmail(){ return this.email; }
     public String getPhone(){ return this.phone; }
     public String getPassword(){ return this.password; }
-    public int getAge(){ return this.age; }
+    public Integer getAge(){ return this.age; }
 
     public void setId(Long id){ this.id = id; }
     public void setName(String name){ this.name = name; }
     public void setEmail(String email){ this.email = email; }
     public void setPhone(String phone){ this.phone = phone; }
     public void setPassword(String password){ this.password = password; }
-    public void setAge(int age){ this.age = age; }
+    public void setAge(Integer age){ this.age = age; }
 }

@@ -50,29 +50,36 @@ public class UserService {
 
     //DELETE
     public String deleteUserById(Long id){
+        if(!userRepository.existsById(id)) return "User not found";
         userRepository.deleteById(id);
         return "User was deleted";
     }
 
     //POST
-    public String login(UserRequestDTO user){
+    public String register(UserRequestDTO user){
+        if(userRepository.existsByEmail(user.getEmail())) return "Email is already in use";
+        if(userRepository.existsByPhone(user.getPhone())) return "Number is already in use";
         userRepository.save(makeUser(user));
         return "User was saved";
     }
 
     //PUT
-    public String updateUserById(Long id, User newUser){
+    public String updateUserById(Long id, UserRequestDTO newUser){
         Optional<User> currentUser = userRepository.findById(id);
-        if(currentUser.isPresent()){
-            User user = currentUser.get();
-            user.setName(newUser.getName());
-            user.setEmail(newUser.getEmail());
-            user.setPhone(newUser.getPhone());
-            user.setPassword(newUser.getPassword());
-            user.setAge(newUser.getAge());
-            userRepository.save(user);
-            return "User was updated";
+        if (currentUser.isEmpty()) return "User not found";
+        User user = currentUser.get();
+        if(!user.getEmail().equals(newUser.getEmail()) && userRepository.existsByEmail(newUser.getEmail())){
+            return "Email is already in use";
         }
-        return "User not found";
+        if(!user.getPhone().equals(newUser.getPhone()) && userRepository.existsByPhone(newUser.getPhone())){
+            return "Number is already in use";
+        }
+        user.setName(newUser.getName());
+        user.setEmail(newUser.getEmail());
+        user.setPhone(newUser.getPhone());
+        user.setPassword(newUser.getPassword());
+        user.setAge(newUser.getAge());
+        userRepository.save(user);
+        return "update was successful";
     }
 }
